@@ -16,8 +16,8 @@ import {nftImageRouter} from "./domains/nft_image/NftImageController"
 const app: Express = express();
 dotenv.config();
 
-app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.use(cors());
 
 
