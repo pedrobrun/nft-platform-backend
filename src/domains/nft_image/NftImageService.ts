@@ -21,4 +21,10 @@ export class NftImageService {
     
   }
 
+  public async getAll() {
+    
+    return NftImageModel.find();
+
+  }
+
 }
