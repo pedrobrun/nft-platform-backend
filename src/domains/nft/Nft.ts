@@ -1,17 +1,15 @@
 import {model, Schema} from 'mongoose';
+import { nftImageRouter } from '../nft_image/NftImageController';
 
 export interface NftInterface {
   title: string,
   usdFloorPrice: number,
   description: string,
   creator: string,
-  image: {
-    data: Buffer,
-    contentType: string
-  }
+  file: string
 }
 
-const UserSchema = new Schema<NftInterface>({
+const NftSchema = new Schema<NftInterface>({
   title: {
     type: String,
     required: true
@@ -28,10 +26,11 @@ const UserSchema = new Schema<NftInterface>({
     type: String,
     required: true,
   },
-  image: {
-    data: Buffer,
-    contentType: String
+  file: {
+    type: String,
+    required: true,
   }
 }, {timestamps: true});
 
-export const NftModel = model('Nft', UserSchema)
+
+export const NftModel = model('Nft', NftSchema)
