@@ -6,6 +6,7 @@
     "rootDir": "./src",
     "lib": ["ES6"],
     "strict": true,
+    "strictNullChecks": false,
     "esModuleInterop": true
   },
   "include": ["src/**/*"],
