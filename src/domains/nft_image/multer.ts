@@ -1,8 +1,8 @@
-const multer = require("multer");
-const path = require("path");
-const crypto = require("crypto");
-const aws = require("aws-sdk");
-const multerS3 = require("multer-s3");
+import multer from 'multer';
+import path from 'path';
+import crypto from 'crypto'
+import aws from 'aws-sdk'
+import multerS3 from 'multer-s3';
 import { Request as Req, Response as Res } from 'express';
 import { Multer } from 'multer';
 
