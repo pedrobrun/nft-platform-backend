@@ -18,6 +18,7 @@ nftRouter.get("/", (req : Req, res : Res) => {
 /**
  * @param is 
  */
+// TODO: Might need to refactor this, 'cause this controller is taking too much responsability that maybe should be of Service layer
 nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
 
    // because of `[Object: null prototype]`
