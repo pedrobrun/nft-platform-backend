@@ -2,24 +2,23 @@
 import dotenv from "dotenv";
 import express, {Express, Request as Req, Response as Res} from "express";
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 const path = require('path');
-const multer = require('multer');
 import {GridFsStorage} from 'multer-gridfs-storage';
 const crypto = require('crypto');
+import cors from 'cors';
 
 // file imports
 import {indexRouter} from "./index";
 import {userRouter} from "./domains/user/UserController";
 import {nftRouter} from "./domains/nft/NftController";
-import {imgRouter} from "./domains/nft_image/NftImageController"
+import {nftImageRouter} from "./domains/nft_image/NftImageController"
 
 const app: Express = express();
 dotenv.config();
 
-app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 
 // env
@@ -47,13 +46,11 @@ const storage = new GridFsStorage({
   }
 });
 
-export const upload = multer({storage});
-
 // routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
 app.use("/nft", nftRouter)
-app.use("/nft-image", imgRouter(upload));
+app.use("/nft-image", nftImageRouter);
 
 mongoose.connect(`${dbUri}`, {
   useNewUrlParser: true,
