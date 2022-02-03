@@ -19,7 +19,7 @@ NftImageSchema.pre('remove', function() {
   s3.deleteObject({
     Bucket: process.env.BUCKET_NAME,
     Key: this.key,
-  }).promise();
+  }).promise().catch((e) => console.log(e.message));
 })
 
 export const NftImageModel = model('NftImage', NftImageSchema)
