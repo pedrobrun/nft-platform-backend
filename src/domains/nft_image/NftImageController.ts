@@ -26,4 +26,10 @@ nftImageRouter.post('/', multer(multerConfig).single("file"), checkToken, async 
   });
 
   return res.json(nftImage);
-})  
+});
+
+nftImageRouter.get('/', async (req: Req, res: Res) => {
+  const nftImages = await nftImageService.getAll();
+  res.json(nftImages);
+  return nftImages;
+});
