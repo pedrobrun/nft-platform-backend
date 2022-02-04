@@ -38,8 +38,9 @@ export class NftService {
     return NftModel.find();
   }
 
-  public async delete(id: string){
-    return NftModel.findOneAndDelete(id);
+  public async delete(id: string, username: string){
+    const nftToDelete = NftModel.findOne({ _id: id, creator: username });
+    return nftToDelete.delete();
   }
 
   public async findById(id: string){

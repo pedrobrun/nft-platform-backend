@@ -65,7 +65,7 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
 });
 
 /**
- * 
+ * be aware that user controller login method calls this url statically, like 'nft/list/'
  */
 nftRouter.get('/list', checkToken, async (req : Req, res : Res) => {
 
@@ -84,12 +84,13 @@ nftRouter.get('/list', checkToken, async (req : Req, res : Res) => {
  */
 nftRouter.post("/delete/:id", checkToken, async (req : Req, res : Res) => {
   const id = req.params.id;
+  const { username } = req.body;
 
   if (!id) {
     return res.status(404).send({msg: ErrorMessages.NO_DATA});
   }
 
-  const deleted = await nftService.delete(id);
+  const deleted = await nftService.delete(id, username);
 
   if (!deleted) {
     return res.status(404).send({msg: 'Not able to delete.'});
