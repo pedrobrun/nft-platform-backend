@@ -1,4 +1,5 @@
 import express, {Express, Request as Req, Response as Res} from "express";
+import { indexRouter } from "../..";
 import { checkToken } from "../middlewares/jwt";
 import { ErrorMessages, SuccessMessages } from "./Enums";
 import {UserService} from "./UserService";
@@ -53,7 +54,7 @@ userRouter.get("/:id", checkToken, async (req, res) => {
 /**
  * @param is username and password
  */
-userRouter.post("/auth", async (req : Req, res : Res) => {
+userRouter.post("/login", async (req : Req, res : Res) => {
   const {username, password} = req.body;
 
   if(!username || !password) {
@@ -65,6 +66,16 @@ userRouter.post("/auth", async (req : Req, res : Res) => {
   if(authenticated == null) {
     return res.status(404).send({ msg: ErrorMessages.AUTH_FAIL});
   }
+  res.cookie('jwt', authenticated.token);
+  res.cookie('username', authenticated.username);
+
+  // I'm aware this is dangerous if this endpoint changes
+  res.redirect('/nft/list')
 
   res.status(200).send({msg: SuccessMessages.AUTH_SUCC, authenticated});
+});
+
+userRouter.post("/logout", async (req: Req, res: Res) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.redirect('/');
 });
