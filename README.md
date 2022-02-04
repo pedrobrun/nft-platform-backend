@@ -1,2 +1,3 @@
 # nft-platform
-NFT Platform.
+
+TODO: Document API
