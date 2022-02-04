@@ -69,9 +69,6 @@ userRouter.post("/login", async (req : Req, res : Res) => {
   res.cookie('jwt', authenticated.token);
   res.cookie('username', authenticated.username);
 
-  // I'm aware this is dangerous if this endpoint changes
-  res.redirect('/nft/list')
-
   res.status(200).send({msg: SuccessMessages.AUTH_SUCC, authenticated});
 });
 
