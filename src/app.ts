@@ -1,4 +1,11 @@
-// lib/dependencies imports
+/**
+ * 
+ * I'm fully aware that these imports are looking messy:
+ * This was me trying to fix some Heroku build errors
+ * 
+ * 
+ */
+
 import dotenv from "dotenv";
 import express, {Express, Request as Req, Response as Res} from "express";
 import mongoose from "mongoose";
@@ -6,7 +13,7 @@ const path = require('path');
 import {GridFsStorage} from 'multer-gridfs-storage';
 const crypto = require('crypto');
 const cors = require('cors');
-// file imports
+
 import {indexRouter} from "./index";
 import {userRouter} from "./domains/user/UserController";
 import {nftRouter} from "./domains/nft/NftController";
