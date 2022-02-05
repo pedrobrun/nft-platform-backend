@@ -4,7 +4,6 @@ import crypto from 'crypto'
 import aws from 'aws-sdk'
 import multerS3 from 'multer-s3';
 import { Request as Req, Response as Res } from 'express';
-import { Multer } from 'multer';
 
 const storageTypes: string | any = {
   local: multer.diskStorage({
