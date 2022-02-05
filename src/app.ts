@@ -18,11 +18,13 @@ dotenv.config();
 
 const dbUri = process.env.MONGO_URI;
 
+const port = process.env.PORT || 3000;
+
 mongoose.connect(`${dbUri}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 },).then(() => {
-  app.listen(process.env.PORT || 3000);
+  app.listen(port);
   console.log("Connected to database");
 }).catch((err) => console.log(err));
 
