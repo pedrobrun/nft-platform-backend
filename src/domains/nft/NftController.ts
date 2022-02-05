@@ -33,7 +33,8 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
   } = json;
   usdFloorPrice = Number(usdFloorPrice);
 
-  const { size, key, location: url } = req.file;
+  // req.file type does not contain location and key
+  const { size, key, location: url } = req.file as any;
   
   if (!title || !description || !usdFloorPrice || !creator || !size || !key || !url) {
     res.status(404).send({msg: ErrorMessages.NO_DATA});

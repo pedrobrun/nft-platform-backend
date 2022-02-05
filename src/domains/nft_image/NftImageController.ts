@@ -12,7 +12,8 @@ const nftImageService = new NftImageService();
 
 nftImageRouter.post('/', multer(multerConfig).single("file"), checkToken, async (req : Req, res : Res) => {
   
-  const { size, key, location: url } = req.file;
+  // req.file type does not contain location and key
+  const { size, key, location: url } = req.file as any;
 
   console.log(req.file)
   if (!req.body) {
