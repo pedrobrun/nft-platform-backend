@@ -64,7 +64,7 @@ userRouter.post("/login", async (req : Req, res : Res) => {
   res.status(200).send({msg: SuccessMessages.AUTH_SUCC, authenticated});
 });
 
-userRouter.post("/logout", async (req: Req, res: Res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
+// TODO: figure out how to make a good server-side logout method
+userRouter.post("/logout", checkToken, async (req: Req, res: Res) => {
   res.redirect('/');
 });
