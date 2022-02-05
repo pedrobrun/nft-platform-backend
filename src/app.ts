@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 const path = require('path');
 import {GridFsStorage} from 'multer-gridfs-storage';
 const crypto = require('crypto');
-import cors from 'cors';
+const cors = require('cors');
 import http from 'http';
 // file imports
 import {indexRouter} from "./index";
