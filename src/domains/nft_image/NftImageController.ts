@@ -4,10 +4,10 @@ import multer from 'multer';
 import { multerConfig } from './multer';
 import {NftImageService} from './NftImageService';
 import {checkToken} from "../middlewares/jwt";
+import { ErrorMessages } from './Enums';
 
 export const nftImageRouter = express.Router();
 
-// for dependency injection, once there's a repository layer
 const nftImageService = new NftImageService();
 
 nftImageRouter.post('/', multer(multerConfig).single("file"), checkToken, async (req : Req, res : Res) => {
@@ -16,7 +16,7 @@ nftImageRouter.post('/', multer(multerConfig).single("file"), checkToken, async 
 
   console.log(req.file)
   if (!req.body) {
-      res.status(400).send({ msg: 'No data to register.'});
+      res.status(400).send({ msg: ErrorMessages.NO_DATA});
   }
 
   const nftImage = await nftImageService.createNftImage({
