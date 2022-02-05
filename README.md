@@ -6,12 +6,16 @@
 ### Improvements to be made
   * Tests
       - Since the application paper didn't mention automated Tests writing, I chose not to implement them at first, fearing I'd not be able to finish everything before the deadline. But I definitely need to implement Tests and I plan on using Jest.
+<br/>
   * Decoupling/DI
       - I probably should have been more patient before I started coding, and implemented better architectured layers with a Repository from the beggining. This way I would've been able to use more Dependency Injection to decouple more everything.
+<br/>
   * Responsabilities
       - There are controllers that I think might have ended up with too many responsabilies. I must refactor that and transfer logic responsabilites to Service layer.
+<br/>
   * Clean code
       - There's always room for improvement, so overall writing cleaner code.
+<br/>
   * Documentation
       - I want to write Swagger documentation for the Api.
 
