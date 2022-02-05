@@ -6,7 +6,6 @@ const path = require('path');
 import {GridFsStorage} from 'multer-gridfs-storage';
 const crypto = require('crypto');
 const cors = require('cors');
-import http from 'http';
 // file imports
 import {indexRouter} from "./index";
 import {userRouter} from "./domains/user/UserController";
