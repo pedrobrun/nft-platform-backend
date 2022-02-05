@@ -1,12 +1,7 @@
-import { UserInterface, UserModel } from "../user/User";
-import { hash, genSalt } from "bcrypt";
-import { response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { UserModel } from "../user/User";
 import { NftInterface, NftModel } from "./Nft";
-import { userRouter } from "../user/UserController";
 import { NftImageService } from "../nft_image/NftImageService";
-import { NftImageInterface } from "../nft_image/NftImage";
+import mongoose from "mongoose";
 
 /**
  * TODO: implement Repository layer for more decoupling and dependency injection
@@ -34,17 +29,24 @@ export class NftService {
     
   }
 
+  // TODO (URGENT): DECOUPLE THIS 
+  // I had to do this extremely coupled spaghetti code because I couldn't use
+  // model interface for the methods that search in DB.
+
   public async getAll(){
     return NftModel.find();
   }
 
   public async delete(id: string, username: string){
-    const nftToDelete = NftModel.findOne({ _id: id, creator: username });
-    return nftToDelete.delete();
+    if (mongoose.Types.ObjectId.isValid(id)){
+      const nftToDelete = await NftModel.findOne({ _id: id, creator: username });
+      return NftModel.deleteOne(nftToDelete)
+    }
+    return null;
   }
 
   public async findById(id: string){
-    return UserModel.findById(id, '-password')
+    return NftModel.findById(id)
   }
 
 }

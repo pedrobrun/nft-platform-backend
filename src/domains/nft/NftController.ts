@@ -1,11 +1,12 @@
 import express, {Express, Request as Req, Response as Res} from "express";
-import {ErrorMessages, SuccessMessages} from "../user/Enums";
 import {checkToken} from "../middlewares/jwt";
 import {NftService} from "./NftService"
 import { NftImageService } from "../nft_image/NftImageService";
 import multer from "multer";
 import { multerConfig } from "../nft_image/multer";
 import { urlencoded } from "body-parser";
+import { SuccessMessages, ErrorMessages } from './Enums'
+
 export const nftRouter = express.Router();
 nftRouter.use(urlencoded({ extended: true }))
 const nftImageService = new NftImageService();
@@ -15,9 +16,6 @@ nftRouter.get("/", (req : Req, res : Res) => {
   res.send({msg: "NFT endpoint."});
 });
 
-/**
- * @param is 
- */
 // TODO: Might need to refactor this, 'cause this controller is taking too much responsability that maybe should be of Service layer
 nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
 
@@ -33,13 +31,12 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
   var {
     usdFloorPrice
   } = json;
-
   usdFloorPrice = Number(usdFloorPrice);
 
   const { size, key, location: url } = req.file;
   
   if (!title || !description || !usdFloorPrice || !creator || !size || !key || !url) {
-    res.status(404).send({msg: "Required data was not given to register."});
+    res.status(404).send({msg: ErrorMessages.NO_DATA});
     return;
   }
   const createdImage = await nftImageService.createNftImage({
@@ -70,18 +67,23 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
 nftRouter.get('/list', checkToken, async (req : Req, res : Res) => {
 
   const nfts = await nftService.getAll();
-
   if (! nfts || nfts === null || nfts.length < 1) {
-    return res.status(200).send({msg: 'There are no NFTs to show.'})
+    return res.status(200).send({msg: SuccessMessages.NO_NFTS_SHOW})
   }
 
   res.status(200).send(nfts);
 
 });
 
-/**
- * @param is 
- */
+nftRouter.get('/:id', checkToken, async (req: Req, res: Res) => {
+  const nft = await nftService.findById(req.params.id);
+  if (!nft) {
+    return res.status(200).send({ msg: SuccessMessages.NO_NFTS_SHOW });
+  }
+
+  res.status(200).send(nft);
+});
+
 nftRouter.post("/delete/:id", checkToken, async (req : Req, res : Res) => {
   const id = req.params.id;
   const { username } = req.body;
@@ -93,8 +95,8 @@ nftRouter.post("/delete/:id", checkToken, async (req : Req, res : Res) => {
   const deleted = await nftService.delete(id, username);
 
   if (!deleted) {
-    return res.status(404).send({msg: 'Not able to delete.'});
+    return res.status(404).send({msg: ErrorMessages.FAIL_DELETE});
   }
 
-  res.status(200).send({msg: 'Successfully deleted', deleted});
+  res.status(200).send({msg: SuccessMessages.SUCC_DELETE, deleted});
 });
