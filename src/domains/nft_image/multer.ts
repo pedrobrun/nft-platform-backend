@@ -7,10 +7,10 @@ import { Request as Req, Response as Res } from 'express';
 
 const storageTypes: string | any = {
   local: multer.diskStorage({
-    destination: (req: Req, file: Express.Multer.File, cb: any) => {
+    destination: (req: Req, file: any, cb: any) => {
       cb(null, path.resolve(__dirname, "..", "..", "tmp", "uploads"));
     },
-    filename: (req: Req, file: Express.Multer.File, cb: any) => {
+    filename: (req: Req, file: any, cb: any) => {
       crypto.randomBytes(16, (err: any, hash: any) => {
         if (err) cb(err);
 
@@ -25,7 +25,7 @@ const storageTypes: string | any = {
     bucket: 'nft-platform-images',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: "public-read",
-    key: (req: Req, file: Express.Multer.File, cb: any) => {
+    key: (req: Req, file: any, cb: any) => {
       crypto.randomBytes(16, (err: any, hash: any) => {
         if (err) cb(err);
 
@@ -43,7 +43,7 @@ export const multerConfig = {
   limits: {
     fileSize: 2 * 1024 * 1024
   },
-  fileFilter: (req: Req, file: Express.Multer.File, cb: any) => {
+  fileFilter: (req: Req, file: any, cb: any) => {
     const allowedMimes = [
       "image/jpeg",
       "image/pjpeg",
