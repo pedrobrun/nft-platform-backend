@@ -12,9 +12,6 @@ userRouter.get("/", (req : Req, res : Res) => {
   res.send({msg: "User endpoint."});
 });
 
-/**
- * @param is username and password
- */
 userRouter.post("/register", async (req : Req, res : Res) => {
   const {username, password, passwordConfirmation} = req.body;
   
@@ -37,11 +34,9 @@ userRouter.post("/register", async (req : Req, res : Res) => {
   
 });
 
-// Private Route
 userRouter.get("/:id", checkToken, async (req, res) => {
   const id = req.params.id;
 
-  // check if user exists
   const user = await userService.findById(id);
 
   if (!user) {
@@ -51,14 +46,11 @@ userRouter.get("/:id", checkToken, async (req, res) => {
   res.status(200).json({ user });
 });
 
-/**
- * @param is username and password
- */
 userRouter.post("/login", async (req : Req, res : Res) => {
   const {username, password} = req.body;
 
   if(!username || !password) {
-    return res.status(404).send({msg: ErrorMessages.NO_DATA});
+    return res.status(400).send({msg: ErrorMessages.NO_DATA});
   }
 
   const authenticated = await userService.authUser({username, password});
