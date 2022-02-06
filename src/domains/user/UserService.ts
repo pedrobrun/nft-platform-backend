@@ -1,6 +1,5 @@
 import { UserInterface, UserModel } from "./User";
 import { hash, genSalt } from "bcrypt";
-import { response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

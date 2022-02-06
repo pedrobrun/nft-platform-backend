@@ -1,4 +1,3 @@
-import e from 'express';
 import express, {Request as Req, Response as Res} from 'express';
 import multer from 'multer';
 import { multerConfig } from './multer';

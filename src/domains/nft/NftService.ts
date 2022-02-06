@@ -1,4 +1,3 @@
-import { UserModel } from "../user/User";
 import { NftInterface, NftModel } from "./Nft";
 import { NftImageService } from "../nft_image/NftImageService";
 import mongoose from "mongoose";

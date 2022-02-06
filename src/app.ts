@@ -3,7 +3,6 @@
  * I'm fully aware that these imports are looking messy:
  * This was me trying to fix some Heroku build errors
  * 
- * 
  */
 
 import dotenv from "dotenv";

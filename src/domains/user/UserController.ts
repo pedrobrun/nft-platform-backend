@@ -1,5 +1,4 @@
 import express, {Express, Request as Req, Response as Res} from "express";
-import { indexRouter } from "../..";
 import { checkToken } from "../middlewares/jwt";
 import { ErrorMessages, SuccessMessages } from "./Enums";
 import {UserService} from "./UserService";

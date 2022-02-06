@@ -6,7 +6,6 @@ import multer from "multer";
 import { multerConfig } from "../nft_image/multer";
 import { urlencoded } from "body-parser";
 import { SuccessMessages, ErrorMessages } from './Enums'
-import cors from "cors";
 
 export const nftRouter = express.Router();
 nftRouter.use(urlencoded({ extended: true }))

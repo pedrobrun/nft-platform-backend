@@ -1,5 +1,4 @@
 import {model, Schema} from 'mongoose';
-import { nftImageRouter } from '../nft_image/NftImageController';
 
 export interface NftInterface {
   title: string,
