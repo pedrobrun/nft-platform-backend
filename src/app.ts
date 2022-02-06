@@ -26,10 +26,6 @@ const dbUri = process.env.MONGO_URI;
 
 const port = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
 
 mongoose.connect(`${dbUri}`, {
   useNewUrlParser: true,
@@ -38,6 +34,10 @@ mongoose.connect(`${dbUri}`, {
   app.listen(port);
   console.log("Connected to database");
 }).catch((err) => console.log(err));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 const dbPort = process.env.DB_PORT;
 
