@@ -19,7 +19,6 @@ nftRouter.get("/", (req : Req, res : Res) => {
 
 // TODO: Might need to refactor this, 'cause this controller is taking too much responsability that maybe should be of Service layer
 nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/nft/create")
    // because of `[Object: null prototype]`
   const json = JSON.parse(JSON.stringify(req.body));
   const {
@@ -38,8 +37,7 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
   const { size, key, location: url } = req.file as any;
   
   if (!title || !description || !usdFloorPrice || !creator || !size || !key || !url) {
-    res.status(404).send({msg: ErrorMessages.NO_DATA});
-    return;
+    return res.status(404).send({msg: ErrorMessages.NO_DATA});
   }
   const createdImage = await nftImageService.createNftImage({
     key,
@@ -56,10 +54,10 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
   });
   
   if (!createdNft) {
-    res.status(500).send({msg: "Error while attempting to create Nft"});
+    return res.status(500).send({msg: "Error while attempting to create Nft"});
   }
 
-  res.status(200).send({msg: 'Nft successfully created!', createdNft})
+  return res.status(200).send({msg: 'Nft successfully created!', createdNft})
 
 });
 
