@@ -18,8 +18,8 @@ nftRouter.get("/", (req : Req, res : Res) => {
 });
 
 // TODO: Might need to refactor this, 'cause this controller is taking too much responsability that maybe should be of Service layer
-nftRouter.post("/create", cors(), checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*")
+nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/nft/create")
    // because of `[Object: null prototype]`
   const json = JSON.parse(JSON.stringify(req.body));
   const {
