@@ -34,7 +34,11 @@ mongoose.connect(`${dbUri}`, {
   console.log("Connected to database");
 }).catch((err) => console.log(err));
 
-app.use(cors())
+app.use((req: Req, res:Res, next: any) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  app.use(cors());
+  next();
+})
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
