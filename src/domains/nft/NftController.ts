@@ -6,11 +6,13 @@ import multer from "multer";
 import { multerConfig } from "../nft_image/multer";
 import { urlencoded } from "body-parser";
 import { SuccessMessages, ErrorMessages } from './Enums'
+import { NftRepository } from "./NftRepository";
+import { NftModel } from "./Nft";
 
 export const nftRouter = express.Router();
-nftRouter.use(urlencoded({ extended: true }))
 const nftImageService = new NftImageService();
-const nftService = new NftService(nftImageService);
+const nftRepository = new NftRepository(new NftModel());
+const nftService = new NftService(nftImageService, nftRepository);
 
 nftRouter.get("/", (req : Req, res : Res) => {
   res.send({msg: "NFT endpoint."});

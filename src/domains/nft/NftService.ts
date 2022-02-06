@@ -2,14 +2,17 @@ import { UserModel } from "../user/User";
 import { NftInterface, NftModel } from "./Nft";
 import { NftImageService } from "../nft_image/NftImageService";
 import mongoose from "mongoose";
+import { NftRepository } from "./NftRepository";
 
 /**
  * TODO: implement Repository layer for more decoupling and dependency injection
  */
 export class NftService {
+  private nftRepository: NftRepository;
   private nftImageService: NftImageService;
   
-  constructor(nftImageService: NftImageService) {
+  constructor(nftImageService: NftImageService, nftRepository: NftRepository) {
+    this.nftRepository = nftRepository;
     this.nftImageService = nftImageService;
   }
 
@@ -17,15 +20,13 @@ export class NftService {
 
     const { title, description, usdFloorPrice, creator, file } = nft;
 
-    const model = new NftModel({
+    return this.nftRepository.insert({
       title,
       creator,
       description,
       usdFloorPrice,
       file
     });
-
-    return model.save();
     
   }
 
