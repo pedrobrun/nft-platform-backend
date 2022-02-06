@@ -87,7 +87,8 @@ nftRouter.get('/:id', checkToken, async (req: Req, res: Res) => {
 nftRouter.post("/delete/:id", checkToken, async (req : Req, res : Res) => {
   const id = req.params.id;
   const { username } = req.body;
-
+  console.log(id)
+  console.log(username)
   if (!id) {
     return res.status(400).send({msg: ErrorMessages.NO_DATA});
   }
