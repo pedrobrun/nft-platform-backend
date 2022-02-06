@@ -25,10 +25,7 @@ dotenv.config();
 const dbUri = process.env.MONGO_URI;
 
 const port = process.env.PORT || 3000;
-app.use((req, res, next) => {
-  app.use(cors());
-  next();
-});
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
