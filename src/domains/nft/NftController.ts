@@ -6,6 +6,7 @@ import multer from "multer";
 import { multerConfig } from "../nft_image/multer";
 import { urlencoded } from "body-parser";
 import { SuccessMessages, ErrorMessages } from './Enums'
+import cors from "cors";
 
 export const nftRouter = express.Router();
 nftRouter.use(urlencoded({ extended: true }))
@@ -17,7 +18,7 @@ nftRouter.get("/", (req : Req, res : Res) => {
 });
 
 // TODO: Might need to refactor this, 'cause this controller is taking too much responsability that maybe should be of Service layer
-nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
+nftRouter.post("/create", cors(), checkToken, multer(multerConfig).single("file"), async (req : Req, res : Res) => {
   res.setHeader("Access-Control-Allow-Origin", "*")
    // because of `[Object: null prototype]`
   const json = JSON.parse(JSON.stringify(req.body));
