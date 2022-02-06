@@ -27,7 +27,7 @@ const dbUri = process.env.MONGO_URI;
 const port = process.env.PORT || 3000;
 
 var allowCrossDomain = function(req:Req, res:Res, next:any) {
-  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Origin', "http://localhost:3000/");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
