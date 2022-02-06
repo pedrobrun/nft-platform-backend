@@ -16,12 +16,11 @@ userRouter.post("/register", async (req : Req, res : Res) => {
   const {username, password, passwordConfirmation} = req.body;
   
   if (!username || !password) {
-    res.status(404).send({msg: "Required data was not given to register."});
-    return;
+    return res.status(400).send({msg: "Required data was not given to register."});
   }
 
   if(password !== passwordConfirmation) {
-    return res.status(404).send({msg: ErrorMessages.PASSWORD_CONFIRMATION})
+    return res.status(400).send({msg: ErrorMessages.PASSWORD_CONFIRMATION})
   }
 
   const registeredUser = await userService.registerUser({username, password});
