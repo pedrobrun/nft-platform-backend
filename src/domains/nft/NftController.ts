@@ -89,7 +89,7 @@ nftRouter.post("/delete/:id", checkToken, async (req : Req, res : Res) => {
   const { username } = req.body;
 
   if (!id) {
-    return res.status(404).send({msg: ErrorMessages.NO_DATA});
+    return res.status(400).send({msg: ErrorMessages.NO_DATA});
   }
 
   const deleted = await nftService.delete(id, username);
