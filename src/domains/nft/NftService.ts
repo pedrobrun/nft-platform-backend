@@ -40,7 +40,9 @@ export class NftService {
   public async delete(id: string, username: string){
     if (mongoose.Types.ObjectId.isValid(id)){
       const nftToDelete = await NftModel.findOne({ _id: id, creator: username });
-      return NftModel.deleteOne(nftToDelete)
+      if(nftToDelete){
+        return NftModel.deleteOne(nftToDelete)
+      }
     }
     return null;
   }
