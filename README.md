@@ -2,6 +2,7 @@
 ## Here are my considerations and conclusion on the backend application of the project.
 Frontend docs: https://github.com/pedrobrun/nft-platform-frontend
 <!--ts-->
+Please, I'd really appreciate any feedback on the project.
 
 ### Improvements to be made
   * Tests
