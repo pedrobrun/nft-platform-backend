@@ -16,7 +16,7 @@
 
   * Responsabilities
       - There are controllers that I think might have ended up with too many responsabilies. I must refactor that and transfer logic responsabilites to Service layer.
-      :yellow_circle: ADD REPOSITORY LAYE: In progress. Check out feat/add-repository-layer branch.
+      - :yellow_circle: ADD REPOSITORY LAYER: In progress. Check out feat/add-repository-layer branch.
       
 <br/>
 
