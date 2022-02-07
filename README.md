@@ -1,6 +1,6 @@
 # Mock NFT Platform. 
 ## Here are my considerations and conclusion on the backend application of the project.
-
+Frontend docs: https://github.com/pedrobrun/nft-platform-frontend
 <!--ts-->
 
 ### Improvements to be made
