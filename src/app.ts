@@ -65,8 +65,5 @@ const storage = new GridFsStorage({
 // routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
-/**
- * be aware that user controller login method calls this url statically, like 'nft/list/'
- */
 app.use("/nft", nftRouter)
 app.use("/nft-image", nftImageRouter);

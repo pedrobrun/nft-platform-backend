@@ -22,7 +22,6 @@ userRouter.post("/register", async (req : Req, res : Res) => {
   if (existing) {
     return res.status(400).send({msg: "Username already exists."});
   }
-  console.log(existing)
 
   const registeredUser = await userService.registerUser({username, password});
 

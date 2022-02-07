@@ -60,9 +60,6 @@ nftRouter.post("/create", checkToken, multer(multerConfig).single("file"), async
 
 });
 
-/**
- * be aware that user controller login method calls this url statically, like 'nft/list/'
- */
 nftRouter.get('/list', checkToken, async (req : Req, res : Res) => {
 
   const nfts = await nftService.getAll();

@@ -1,6 +1,3 @@
-import { response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { NftImageInterface, NftImageModel } from "./NftImage";
 
 export class NftImageService {
@@ -16,15 +13,11 @@ export class NftImageService {
       size,
       url,
     });
-
     return model.save();
-    
   }
 
   public async getAll() {
-    
     return NftImageModel.find();
-
   }
 
 }
