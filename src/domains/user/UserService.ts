@@ -8,6 +8,7 @@ export class UserService {
   constructor() {}
 
   public async registerUser(user: UserInterface) {
+
     const salt = await genSalt(12);
     user.password = await hash(user.password, salt);
 
@@ -55,5 +56,7 @@ export class UserService {
     return await UserModel.findById(id, '-password')
   }
 
-  public async checkIfExists(user: UserInterface) {}
+  public async checkUsernameExists(username: string) {
+    return await UserModel.findOne({username: username});
+  }
 }
